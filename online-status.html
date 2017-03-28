@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <script>
+      const {ipcRenderer} = require('electron');
+      var notifyOnlineStatus = function() {
+        var ols = navigator.onLine ? "online" : "offline";
+        //window.alert(ols);
+        require("electron").ipcRenderer.send("online-status-changed", ols);
+      };
+
+      //这个监听貌似不太靠谱
+      window.addEventListener("online",  notifyOnlineStatus);
+      window.addEventListener("offline",  notifyOnlineStatus);
+
+      ipcRenderer.on("online-status-changed-reply", function (event, arg) {
+        //alert(arg);
+        var x = document.getElementById("ui_online_status");
+        x.innerHTML = arg;
+      });
+
+    </script>
+    <input type="button" value="btn2" onClick="notifyOnlineStatus()"/><br/>
+    <div id="ui_online_status">unknown</div>
+  </body>
+</html>
+
