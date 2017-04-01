@@ -6,7 +6,7 @@
     "test": "standard",
     "start": "electron ./",
     "clean": "rm -rf SpaceRadar-darwin-x64",
-    "build-win": "electron-packager . demo1 --platform=win32 --arch-ia32 --out ./OutApp --version 1.4.13 --overwrite --ignore=node_modules/hello/src --ignore=node_modules/hello/binding.gyp --ignore=node_modules/hello/build/.vs --ignore=node_modules/hello/build/Debug --ignore=node_modules/hello/build/binding* --ignore=node_modules/hello/build/hello* --ignore=node_modules/hello/build/config.gypi --ignore=node_modules/hello/build/Release/obj --ignore=node_modules/hello/build/Release/hello.exp --ignore=node_modules/hello/build/Release/hello.lib --ignore=node_modules/hello/build/Release/hello.map --ignore=node_modules/hello/build/Release/hello.pdb --icon=./app.ico"
+    "build-win": "electron-packager . demo1 --platform=win32 --arch-ia32 --out ./OutApp --version 1.4.13 --overwrite --ignore=node_modules/hello/src --ignore=node_modules/hello/osx --ignore=node_modules/hello/binding.gyp --ignore=node_modules/hello/win32/.vs --ignore=node_modules/hello/win32/Debug --ignore=node_modules/hello/win32/Release --ignore=node_modules/hello/win32/binding* --ignore=node_modules/hello/win32/hello*  --ignore=node_modules/hello/win32/bin/Debug --ignore=node_modules/hello/win32/bin/Release/hello.pdb --ignore=node_modules/hello/win32/bin/Release/hello.exp --ignore=node_modules/hello/win32/bin/Release/hello.lib --ignore=node_modules/hello/win32/bin/Release/hello.map --icon=./app.ico"
   },
   "dependencies": {
     "hello": "^1.0.0"
