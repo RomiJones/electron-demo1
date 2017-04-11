@@ -18,7 +18,8 @@ app.on("ready", function ()
 	//mainWindow.loadURL("https://www.baidu.com");
     mainWindow.loadURL("file://" + __dirname + "/index.html");//载入应用的inde.html	
 	
-    //mainWindow.openDevTools();	
+    //mainWindow.openDevTools();	//打开浏览器调试工具
+	
     //窗口关闭时触发
     mainWindow.on('closed', function(){
         //想要取消窗口对象的引用， 如果你的应用支持多窗口，
