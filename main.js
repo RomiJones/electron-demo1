@@ -2,6 +2,7 @@ const electron = require("electron");
 const app = electron.app;
 const ipcMain = electron.ipcMain;
 const BrowserWindow = electron.BrowserWindow;
+const nativeImage = electron.nativeImage;
 
 var hello = require("hello");
 
@@ -20,6 +21,11 @@ app.on("ready", function ()
 	
     //mainWindow.openDevTools();	//打开浏览器调试工具
 	
+	//
+	var iconImage = nativeImage.createFromPath(__dirname + "/logo.png");
+	console.log(iconImage);
+	mainWindow.setIcon(iconImage);
+	
     //窗口关闭时触发
     mainWindow.on('closed', function(){
         //想要取消窗口对象的引用， 如果你的应用支持多窗口，
@@ -30,6 +36,7 @@ app.on("ready", function ()
 
     onlineStatusWindow = new BrowserWindow({width:300,height:300,frame:true,show:true});
     onlineStatusWindow.loadURL("file://" + __dirname + "/online-status.html");
+	onlineStatusWindow.setIcon(iconImage);
 
     onlineStatusWindow.on('closed', function(){
     	console.log("onlineStatusWindow closed...");
@@ -52,7 +59,9 @@ ipcMain.on('sync-message', function (event, arg){
 //ipcMain对异步消息的处理
 ipcMain.on("invoke-cpp-module", function(event, originStr) {
 	var retStr = hello.f1();
-	event.sender.send("invoke-cpp-module-reply", originStr +  " " + retStr);
+	var curProcessId = hello.getCurrentProcessId();
+	console.log("current process id :" + curProcessId); //在main process中会输出到黑框console，在renderer process中会输出到devtool的console
+	event.sender.send("invoke-cpp-module-reply", originStr +  " " + retStr + " [Main Process Id : " + curProcessId + "]");
 });
 
 ipcMain.on("online-status-changed", function(event, status){
