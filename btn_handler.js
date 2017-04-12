@@ -2,7 +2,7 @@ var hello = require("hello");
 function onClickBtn1() {
 	//alert(hello.f1());
 	
-	//文档上说，只有main process中才能调用gui模块和系统底层模块
+	//文档上说，只有main process中才能调用gui模块和系统底层模块(本地gui模块是啥？)
 	//意思是不是说render process中只调用前端js和electron接口
 	//main process中才能调用nodejs，底层c++，以及electron接口
 	alert("current process id :" + hello.getCurrentProcessId());
