@@ -1,3 +1,6 @@
+const os = require('os');
+var platform = os.platform();
+
 const electron = require("electron");
 const app = electron.app;
 const ipcMain = electron.ipcMain;
@@ -20,11 +23,14 @@ app.on("ready", function ()
     mainWindow.loadURL("file://" + __dirname + "/index.html");//载入应用的inde.html	
 	
     //mainWindow.openDevTools();	//打开浏览器调试工具
-	
-	//
-	var iconImage = nativeImage.createFromPath(__dirname + "/logo.png");
-	console.log(iconImage);
-	mainWindow.setIcon(iconImage);
+
+    var iconImage = null;
+    var isInWin32 = (platform=="win32");
+    if(isInWin32)
+    {
+    	iconImage = nativeImage.createFromPath(__dirname + "/logo.png");
+    	mainWindow.setIcon(iconImage);
+    }
 	
     //窗口关闭时触发
     mainWindow.on('closed', function(){
@@ -36,7 +42,10 @@ app.on("ready", function ()
 
     onlineStatusWindow = new BrowserWindow({width:300,height:300,frame:true,show:true});
     onlineStatusWindow.loadURL("file://" + __dirname + "/online-status.html");
-	onlineStatusWindow.setIcon(iconImage);
+    if(isInWin32)
+    {
+    	onlineStatusWindow.setIcon(iconImage);
+    }
 
     onlineStatusWindow.on('closed', function(){
     	console.log("onlineStatusWindow closed...");
