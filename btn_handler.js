@@ -25,6 +25,10 @@ window.onload = function() {
 	updateContentStyle();
 }
 
+window.onresize = function() {
+	updateContentStyle();
+};
+
 function closeWindow() {
   window.close();
 }
