@@ -12,6 +12,8 @@ var hello = require("hello");
 var mainWindow = null;
 var onlineStatusWindow = null;
 
+app.disableHardwareAcceleration();
+
 //初始化并准备创建主窗口
 app.on("ready", function ()
 {	
