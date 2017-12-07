@@ -71,8 +71,14 @@ ipcMain.on('sync-message', function (event, arg){
 ipcMain.on("invoke-cpp-module", function(event, originStr) {
 	var retStr = hello.f1();
 	var curProcessId = hello.getCurrentProcessId();
+	
 	console.log("current process id :" + curProcessId); //在main process中会输出到黑框console，在renderer process中会输出到devtool的console
 	event.sender.send("invoke-cpp-module-reply", originStr +  " " + retStr + " [Main Process Id : " + curProcessId + "]");
+	
+	//从hello中执行直通回调函数
+	hello.runSyncCallback(function(param){
+		console.log(param);
+	});
 });
 
 ipcMain.on("online-status-changed", function(event, status){
