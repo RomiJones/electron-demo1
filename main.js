@@ -75,9 +75,18 @@ ipcMain.on("invoke-cpp-module", function(event, originStr) {
 	console.log("current process id :" + curProcessId); //在main process中会输出到黑框console，在renderer process中会输出到devtool的console
 	event.sender.send("invoke-cpp-module-reply", originStr +  " " + retStr + " [Main Process Id : " + curProcessId + "]");
 	
-	//从hello中执行直通回调函数
+	//从hello中执行同步回调函数
 	hello.runSyncCallback(function(param){
 		console.log(param);
+	});
+
+    ////从hello中执行异步回调函数
+    hello.runAsyncCallback("<<<<origin string>>>>", function(error, param){
+        if(error) {
+            console.log(error);
+        } else {
+            console.log(param);
+        }		
 	});
 });
 
